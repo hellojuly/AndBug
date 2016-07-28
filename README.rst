@@ -32,5 +32,7 @@ navi
 
 5.exec 'navi'
 
-6.finish
+6.open web brower, enter 'http:localhost:8080'
+
+7.finish
 
