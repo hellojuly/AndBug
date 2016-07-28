@@ -22,6 +22,7 @@
 // Thank you, POSIX, for your shortsightedness, Linux for your haste, and BSD
 // for being as bad as Linux.  Can a brother get a standards update around 
 // here? Until then.. 
+// error "must define htonll/ntohll for this platform"
 
 #if defined(__linux__) 
 #  include <endian.h>
@@ -39,7 +40,9 @@
 #  define htonll(x) __DARWIN_OSSwapInt64(x)
 #  define ntohll(x) __DARWIN_OSSwapInt64(x)
 #else
-#  error "must define htonll/ntohll for this platform"
+#  include <endian.h>
+#  define htonll htobe64
+#  define ntohll be64toh
 #endif
 
 char *jdwp_en_errors[] = {

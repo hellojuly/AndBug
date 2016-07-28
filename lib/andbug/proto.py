@@ -66,9 +66,11 @@ def forward(pid, dev=None):
     if dev:
         dev = andbug.util.find_dev(dev)
     pid = andbug.util.find_pid(pid)
-    temp = tempfile.mktemp() #创建一个临时文件
+    #temp = tempfile.mkstemp() #创建一个临时文件
+    temp = 9999 #临时端口号9999
     cmd = ('-s', dev) if dev else ()  #'-s', 'emulator-5554'
-    cmd += ('forward', 'localfilesystem:' + temp,  'jdwp:%s' % pid) #'-s', 'emulator-5554', 'forward', 'localfilesystem:/tmp/tmpSSCNAl', 'jdwp:843')
+    #cmd += ('forward', 'localfilesystem:' + temp,  'jdwp:%s' % pid) #'-s', 'emulator-5554', 'forward', 'localfilesystem:/tmp/tmpSSCNAl', 'jdwp:843')
+    cmd += ('forward', 'tcp:' + str(temp),  'jdwp:%s' % pid) #'-s', 'emulator-5554', 'forward', 'localfilesystem:/tmp/tmpSSCNAl', 'jdwp:843')
     andbug.util.adb(*cmd)
     return temp
 

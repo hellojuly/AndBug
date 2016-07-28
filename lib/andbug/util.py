@@ -153,6 +153,8 @@ def find_pid(pid, dev=None):
     ps = ('-s', dev, 'shell', 'ps') if dev else ('shell', 'ps') 
     ps = adb(*ps)
     ps = ps.splitlines()
+    while '' in ps:
+        ps.remove('')
     head = ps[0]
     ps = (p.split() for p in ps[1:])
 
